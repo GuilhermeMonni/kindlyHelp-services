@@ -21,6 +21,12 @@ server.get('/search', async (req, res) => {
     }
 })
 
+server.post('/send', async (req, res) => {
+    const {name, services, address, cell, email} = req.body
+
+    console.log(name, services, address, cell, email)
+})
+
 server.listen({
     host: '0.0.0.0',
     port: 3001,

@@ -1,0 +1,13 @@
+GET http://localhost:3001/
+
+###
+POST http://localhost:3001/send
+Content-Type: application/json
+
+{
+    "name": "Guilherme",
+    "services": "developer",
+    "address": "alguma coisa",
+    "cell": "555555",
+    "email": "email algum"
+}
