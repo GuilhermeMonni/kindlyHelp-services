@@ -12,19 +12,29 @@ server.get('/', () => {
     return {message: 'Servidor rodando! 👽'}
 })
 
-server.get('/search', async (req, res) => {
-    try {
-        const services = await sql`SELECT * FROM services`
+server.get('/search', async (req, reply) => {
+    try { //search infos from database
+        const services = await sql`select * from services`
         return services
     } catch (error) {
-        console.error('error when searching for service:', error)
+        reply.code(400).send('error when searching for service:', error)
     }
+
+    reply.code(200).send('sucess when search service')
 })
 
-server.post('/send', async (req, res) => {
+server.post('/send', async (req, reply) => { //send infos to database review
     const {name, services, address, cell, email} = req.body
+    const id = crypto.randomUUID()
 
-    console.log(name, services, address, cell, email)
+    try{
+        const review = await sql`insert into review (id, name, services,address, cell, email) values (${id}, ${name}, ${services}, ${address}, ${cell}, ${email})`
+        return review
+    } catch(error){
+        reply.code(400).send('error when send service:', error)
+    }
+
+    reply.code(201).send('data sends to table review')
 })
 
 server.listen({
