@@ -6,7 +6,10 @@ import {sql} from "./database.js"
 dotenv.config()
 
 const server = fastify({ logger: true })
-await server.register(cors, { origin: true })
+await server.register(cors, { 
+    origin: ['https://kindlyhelp.vercel.app/', 'http://localhost:3000'],
+    credentials: true
+})
 
 server.get('/', () => {
     return {message: 'Servidor rodando! 👽'}
