@@ -7,7 +7,7 @@ dotenv.config()
 
 const server = fastify({ logger: true })
 await server.register(cors, { 
-    origin: 'https://kindlyhelp.vercel.app/',
+    origin: ['https://kindlyhelp.vercel.app', 'http://localhost:5173'],
     credentials: true
 })
 
